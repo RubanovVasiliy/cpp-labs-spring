@@ -3,4 +3,8 @@ project(cpp_labs)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(cpp_labs main.cpp)
+include(cmake/CompileOptions.cmake)
+
+add_subdirectory(external)
+add_subdirectory(src)
+add_subdirectory(test)
