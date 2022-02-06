@@ -1,0 +1,3 @@
+/Users/macos/CLionProjects/OS/cpp-labs/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/macos/CLionProjects/OS/cpp-labs/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/macos/CLionProjects/OS/cpp-labs/cmake-build-debug/CMakeFiles/cpp_labs.dir
