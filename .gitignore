@@ -3,7 +3,7 @@
 cmake-build-debug
 node_modules/
 dist/
-.idea
+build/
 
 # Compiled Java class files
 *.class

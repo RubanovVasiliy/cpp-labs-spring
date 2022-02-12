@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-add_executable(time_test libcsc/libcsc/time.cpp)
+add_executable(time_test libcsc/libcsc/time/time.cpp)
 
 set_compile_options(time_test)
 
