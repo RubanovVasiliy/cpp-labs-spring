@@ -35,4 +35,4 @@ namespace my_time {
     Time operator-(const Time &time, const TimeSpan &timeSpan) {
         return Time(abs(time.getTime() - timeSpan.seconds_));
     }
-}
+};

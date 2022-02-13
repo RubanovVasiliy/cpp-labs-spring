@@ -1,9 +1,9 @@
 #pragma once
 
-#include <iostream>
-#include <iomanip>
-#include <cmath>
 #include "MyTime.h"
+#include <cmath>
+#include <iomanip>
+#include <iostream>
 
 
 namespace my_time {
@@ -30,4 +30,4 @@ namespace my_time {
 
         friend Time operator-(const Time& time, const TimeSpan& timeSpan);
     };
-}
+};

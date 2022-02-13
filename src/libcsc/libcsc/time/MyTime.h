@@ -1,8 +1,8 @@
 #pragma once
 
 #include <ctime>
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
 
 namespace my_time {
@@ -18,10 +18,23 @@ namespace my_time {
 
     public:
         Time();
+
         explicit Time(time_t time);
 
         time_t getTime() const;
 
         friend std::ostream &operator<<(std::ostream &os, const Time &time);
     };
-}
+
+    inline namespace literals {
+        Time operator ""_s(uint64_t time);
+
+        Time operator ""_m(uint64_t time);
+
+        Time operator ""_h(uint64_t time);
+
+        Time operator ""_d(uint64_t time);
+
+        Time operator "" _s(const char *str);
+    };
+};
