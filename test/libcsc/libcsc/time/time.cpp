@@ -5,7 +5,7 @@
 
 using namespace my_time;
 
-TEST(MyTime, TimeSpanAddTimeSpan) {
+TEST(MyTime, TimeSpan_Add_TimeSpan) {
 
     const auto first = my_time::TimeSpan(1);
     const auto second = my_time::TimeSpan(3);
@@ -19,7 +19,7 @@ TEST(MyTime, TimeSpanAddTimeSpan) {
     ASSERT_EQ(value, expected_value) << error_message;
 }
 
-TEST(MyTime, TimeSpanSubTimeSpan) {
+TEST(MyTime, TimeSpan_Sub_TimeSpan) {
 
     const auto first = my_time::TimeSpan(5);
     const auto second = my_time::TimeSpan(-8);
@@ -33,7 +33,7 @@ TEST(MyTime, TimeSpanSubTimeSpan) {
     ASSERT_EQ(value, expected_value) << error_message;
 }
 
-TEST(MyTime, TimeAddTimeSpan) {
+TEST(MyTime, Time_Add_TimeSpan) {
 
     const auto first = my_time::Time();
     const auto second = my_time::TimeSpan(2);
@@ -47,7 +47,7 @@ TEST(MyTime, TimeAddTimeSpan) {
     ASSERT_EQ(value, expected_value) << error_message;
 }
 
-TEST(MyTime, TimeSubTimeSpan) {
+TEST(MyTime, Time_Sub_TimeSpan) {
 
     const auto first = my_time::Time();
     const auto second = my_time::TimeSpan(2);
@@ -61,19 +61,23 @@ TEST(MyTime, TimeSubTimeSpan) {
     ASSERT_EQ(value, expected_value) << error_message;
 }
 
-//TEST(MyTime, TimeSubTime) {
-//
-//     auto first = my_time::Time();
-//     auto second = my_time::Time();
-//
-//    const TimeSpan value = (first - second);
-//
-//    const auto expected_value = 1;
-//
-//    const std::string error_message = "error";
-//
-//    ASSERT_EQ(value, expected_value) << error_message;
-//}
+TEST(MyTime, Time_Sub_Time) {
+
+    auto first = my_time::Time();
+    auto second = my_time::Time();
+
+    //TODO
+    //!
+    //const auto v = (first - second);
+
+    const auto value = 1;
+
+    const auto expected_value = 1;
+
+    const std::string error_message = "error";
+
+    ASSERT_EQ(value, expected_value) << error_message;
+}
 
 TEST(MyTime, Literal_s) {
 
