@@ -2,6 +2,13 @@
 
 namespace my_smartptr {
     template<class T>
+    SharedPtr<T>::SharedPtr():ptr_(nullptr), count_(0) {}
+
+    template<class T>
+    SharedPtr<T>::SharedPtr(T *ptr):ptr_(ptr), count_(1) {
+    }
+
+    template<class T>
     T &SharedPtr<T>::operator*() {
         return;
     }
