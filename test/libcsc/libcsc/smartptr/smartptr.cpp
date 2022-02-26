@@ -3,16 +3,43 @@
 #include <gtest/gtest.h>
 #include <string>
 
-TEST(MySmartptr, first) {
+using my_smartptr::SharedPtr;
 
-    //const auto first = 1;
-    //const auto second = 2;
+struct Foo {
+private:
+    int a_;
+public:
+    explicit Foo(int in) : a_(in) {}
+
+    void print() const {
+        std::cout << "a = " << a_ << '\n';
+    }
+
+    void setA(int a) {
+        Foo::a_ = a;
+    }
+};
+
+TEST(MySmartptr, SharedPtr_) {
+
+    my_smartptr::SharedPtr<int> ptr1;
+
+    //ASSERT_EQ(0,ptr1.use_count());
+
+    auto ptr = std::make_shared<Foo>(10);
+    //auto exep_ptr = my_smartptr::SharedPtr<Foo>(new Foo(10));
+
+    //exep_ptr->print();
+
+    //exep_ptr->print();
+    //(*exep_ptr).print();
+
+    ptr->print();
+    (*ptr).print();
 
     const auto value = 1;
 
     const auto expected_value = 1;
 
-    const std::string error_message = "error";
-
-    ASSERT_EQ(value, expected_value) << error_message;
+    ASSERT_EQ(value, expected_value);
 }
