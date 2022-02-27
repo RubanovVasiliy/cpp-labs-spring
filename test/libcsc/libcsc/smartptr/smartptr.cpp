@@ -1,9 +1,9 @@
-#include <SharedPtr.h>
-#include <UniquePtr.h>
+#include <smartptr/SharedPtr.h>
+#include <smartptr/UniquePtr.h>
 #include <gtest/gtest.h>
 #include <string>
 
-using my_smartptr::SharedPtr;
+using namespace my_smartptr;
 
 struct Foo {
 private:
@@ -22,11 +22,11 @@ public:
 
 TEST(MySmartptr, SharedPtr_) {
 
-    my_smartptr::SharedPtr<int> ptr1;
+    //SharedPtr<int> ptr1;
 
     //ASSERT_EQ(0,ptr1.use_count());
 
-    auto ptr = std::make_shared<Foo>(10);
+    //auto ptr = std::make_shared<Foo>(10);
     //auto exep_ptr = my_smartptr::SharedPtr<Foo>(new Foo(10));
 
     //exep_ptr->print();
@@ -34,8 +34,8 @@ TEST(MySmartptr, SharedPtr_) {
     //exep_ptr->print();
     //(*exep_ptr).print();
 
-    ptr->print();
-    (*ptr).print();
+   // ptr->print();
+    //(*ptr).print();
 
     const auto value = 1;
 
