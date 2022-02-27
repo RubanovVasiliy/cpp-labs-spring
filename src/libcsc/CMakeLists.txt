@@ -9,10 +9,7 @@ add_library(my_time STATIC
         libcsc/time/TimeSpan.h
         )
 
-add_library(my_smartptr STATIC
-        libcsc/smartptr/SharedPtr.cpp
+add_library(my_smartptr INTERFACE
         libcsc/smartptr/SharedPtr.h
-        libcsc/smartptr/UniquePtr.cpp
         libcsc/smartptr/UniquePtr.h
         )
-

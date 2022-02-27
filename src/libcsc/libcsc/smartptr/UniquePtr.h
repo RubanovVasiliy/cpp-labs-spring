@@ -7,15 +7,52 @@ namespace my_smartptr {
     template<class T>
     class UniquePtr {
     private:
-        T *ptr;
+        T *ptr_;
 
     public:
-        T &operator*();
+        UniquePtr() : ptr_(nullptr) {}
 
-        T *operator->();
+        explicit UniquePtr(const T *ptr) : ptr_(static_cast<T *>( ptr)) {}
 
-        T *get();
+        UniquePtr(const UniquePtr &object) = delete;
 
-        void reset(T *p = nullptr);
+        UniquePtr(UniquePtr &&object) noexcept: ptr_(object.ptr_) {
+            object.ptr_ = nullptr;
+        }
+
+        UniquePtr &operator=(const UniquePtr &object) = delete;
+
+        UniquePtr &operator=(UniquePtr &&object) noexcept {
+            if (&object == this) {
+                return *this;
+            }
+
+            delete ptr_;
+
+            ptr_ = object.m_ptr;
+            object.m_ptr = nullptr;
+
+            return *this;
+        }
+
+        ~UniquePtr() {
+            delete ptr_;
+        };
+
+        T &operator*() {
+            return *ptr_;
+        };
+
+        T *operator->() {
+            return ptr_;
+        };
+
+        T *get() {
+            return ptr_;
+        };
+
+        void reset(T *p = nullptr) {
+            *ptr_ = std::move(p);
+        };
     };
 }
