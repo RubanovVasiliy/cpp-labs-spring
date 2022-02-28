@@ -12,7 +12,7 @@ namespace my_smartptr {
     public:
         UniquePtr() : ptr_(nullptr) {}
 
-        explicit UniquePtr(const T *ptr) : ptr_(static_cast<T *>( ptr)) {}
+        explicit UniquePtr(T *ptr) : ptr_(static_cast<T *>( ptr)) {}
 
         UniquePtr(const UniquePtr &object) = delete;
 
@@ -51,8 +51,8 @@ namespace my_smartptr {
             return ptr_;
         };
 
-        void reset(T *p = nullptr) {
-            *ptr_ = std::move(p);
-        };
+        void reset(T *const ptr = nullptr) {
+            ptr_ = static_cast<T *>(ptr);
+        }
     };
 }

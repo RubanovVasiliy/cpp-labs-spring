@@ -1,4 +1,3 @@
-#include <smartptr/SharedPtr.h>
 #include <smartptr/UniquePtr.h>
 #include <gtest/gtest.h>
 #include <string>
@@ -20,26 +19,19 @@ public:
     }
 };
 
-TEST(MySmartptr, SharedPtr_) {
+TEST(MySmartptr, UniquePtr_operator_multiplication) {
+    auto obj = UniquePtr<int>(new int(1));
 
-    //SharedPtr<int> ptr1;
-
-    //ASSERT_EQ(0,ptr1.use_count());
-
-    //auto ptr = std::make_shared<Foo>(10);
-    //auto exep_ptr = my_smartptr::SharedPtr<Foo>(new Foo(10));
-
-    //exep_ptr->print();
-
-    //exep_ptr->print();
-    //(*exep_ptr).print();
-
-   // ptr->print();
-    //(*ptr).print();
-
-    const auto value = 1;
-
+    const auto value = *obj;
     const auto expected_value = 1;
+    ASSERT_EQ(value, expected_value);
+}
 
+TEST(MySmartptr, UniquePtr_reset) {
+    auto obj = UniquePtr<int>(new int(1));
+    obj.reset(new int (2));
+
+    auto value = *obj;
+    auto expected_value = 2;
     ASSERT_EQ(value, expected_value);
 }
