@@ -42,10 +42,17 @@ TEST(UniquePtr, reset) {
     ASSERT_EQ(value, expected_value);
 }
 
-TEST(UniquePtr, get) {
-    auto obj = std::make_unique<Foo>(Foo(INIT_VALUE));
+TEST(UniquePtr, reset_nullptr) {
+    auto obj = UniquePtr<int>(new int(1));
+    obj.reset();
 
-    auto *value = obj.get();
-    auto *expected_value = obj.get();
-    ASSERT_EQ(value, expected_value);
+    EXPECT_TRUE(obj.get() == nullptr);
+}
+
+TEST(UniquePtr, get) {
+    auto obj = UniquePtr<Foo>(new Foo(INIT_VALUE));
+
+    const auto *value = obj.get();
+    const auto expected_value = Foo(INIT_VALUE);
+    ASSERT_EQ(*value, expected_value);
 }
