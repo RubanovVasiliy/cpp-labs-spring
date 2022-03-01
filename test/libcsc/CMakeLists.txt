@@ -1,4 +1,4 @@
-add_executable(test ${CMAKE_CURRENT_SOURCE_DIR}/libcsc/time/time.cpp ${CMAKE_CURRENT_SOURCE_DIR}/libcsc/smartptr/smartptr.cpp)
+add_executable(test ${CMAKE_CURRENT_SOURCE_DIR}/libcsc/time/time.cpp ${CMAKE_CURRENT_SOURCE_DIR}/libcsc/smartptr/uniqueptr.cpp)
 
 set_compile_options(test)
 

@@ -12,7 +12,7 @@ namespace my_smartptr {
     public:
         UniquePtr() : ptr_(nullptr) {}
 
-        explicit UniquePtr(T *ptr) : ptr_(static_cast<T *>( ptr)) {}
+        explicit UniquePtr(T *ptr) : ptr_(static_cast<T *>(ptr)) {}
 
         UniquePtr(const UniquePtr &object) = delete;
 
