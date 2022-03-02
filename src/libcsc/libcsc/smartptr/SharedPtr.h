@@ -11,66 +11,58 @@ namespace my_smartptr {
         std::size_t count_{0};
 
     public:
-        SharedPtr();
+        SharedPtr() = default;
 
-        explicit SharedPtr(T *ptr);
+        explicit SharedPtr(T *ptr) : ptr_(static_cast<T *>(ptr)) {
+            if (ptr != nullptr) {
+                count_ = 1;
+            }
+        }
 
-        SharedPtr(const SharedPtr &object);
+        SharedPtr(const SharedPtr &object) : ptr_(object.ptr_), count_(object.count_) {
+            if (object.ptr_ != nullptr) {
+                count_ = object.count_ + 1;
+            }
+        };
 
-        SharedPtr(SharedPtr &&object);
+        SharedPtr(SharedPtr &&object) = delete;
 
-        //~SharedPtr() = default;
+        SharedPtr &operator=(const SharedPtr &object) {
+            if (this == &object) {
+                count_++;
+                return *this;
+            }
 
-        T &operator*();
+            ptr_ = object.ptr_;
+            count_ = object.count_;
+            return *this;
+        }
 
-        T *operator->();
+        SharedPtr &operator=(SharedPtr &&object) = delete;
 
-        T *get();
+        ~SharedPtr() {
+            delete ptr_;
+        };
 
-        void reset(T *p = nullptr);
+        T &operator*() {
+            return *ptr_;
+        };
 
-        std::size_t use_count();
+        T *operator->() {
+            return ptr_;
+        };
+
+        T *get() {
+            return ptr_;
+        };
+
+        void reset(T *const ptr = nullptr) {
+            ptr_ = static_cast<T *>(ptr);
+            count_ = 0;
+        }
+
+        std::size_t use_count() {
+            return count_;
+        }
     };
-
-    template<class T>
-    SharedPtr<T>::SharedPtr():ptr_(nullptr) {}
-
-    template<class T>
-    SharedPtr<T>::SharedPtr(T *ptr):ptr_(&ptr), count_(1) {}
-
-    template<class T>
-    SharedPtr<T>::SharedPtr(const SharedPtr &object) : ptr_(new T), count_(object.count_) {
-        *ptr_ = *object.m_ptr;
-        ++count_;
-    }
-
-    template<class T>
-    SharedPtr<T>::SharedPtr(SharedPtr &&object): ptr_(object.ptr_), count_(object.count_) {
-        object.ptr_ = nullptr;
-    }
-
-    template<class T>
-    T &SharedPtr<T>::operator*() {
-        return *ptr_;
-    }
-
-    template<class T>
-    T *SharedPtr<T>::operator->() {
-        return ptr_;
-    }
-
-    template<class T>
-    T *SharedPtr<T>::get() {
-        return ptr_;
-    }
-
-    template<class T>
-    void SharedPtr<T>::reset(T *p) {
-        *ptr_ = std::move(p);
-    }
-
-    template<class T>
-    std::size_t SharedPtr<T>::use_count() {
-        return count_;
-    }
 }
