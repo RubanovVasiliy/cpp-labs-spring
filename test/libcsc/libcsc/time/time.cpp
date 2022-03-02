@@ -1,5 +1,5 @@
-#include <MyTime.h>
-#include <TimeSpan.h>
+#include <time/MyTime.h>
+#include <time/TimeSpan.h>
 #include <gtest/gtest.h>
 #include <string>
 
