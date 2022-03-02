@@ -10,7 +10,7 @@ namespace my_smartptr {
         T *ptr_;
 
     public:
-        UniquePtr() : ptr_(nullptr) {}
+        UniquePtr() = default;
 
         explicit UniquePtr(T *ptr) : ptr_(static_cast<T *>(ptr)) {}
 

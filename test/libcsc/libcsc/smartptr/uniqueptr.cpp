@@ -2,31 +2,21 @@
 #include <gtest/gtest.h>
 #include <string>
 
-using namespace my_smartptr;
-
-class Foo {
-private:
-    int a_;
-public:
-    explicit Foo(int in) : a_(in) {}
-
-    void print() const {
-        std::cout << "a = " << a_ << '\n';
-    }
-
-    void setA(int a) {
-        Foo::a_ = a;
-    }
-
-    bool operator==(Foo obj1) const {
-        return this->a_ == obj1.a_;
-    }
-};
-
 const int INIT_VALUE = 10;
 
+TEST(UniquePtr, operator_assignment) {
+    auto obj = my_smartptr::UniquePtr<int>(new int(INIT_VALUE));
+
+    auto ptr = my_smartptr::UniquePtr<int>(std::move(obj));
+    EXPECT_TRUE(obj.get() == nullptr);
+
+    const auto *value = ptr.get();
+    const auto expected_value = int(INIT_VALUE);
+    ASSERT_EQ(*value, expected_value);
+}
+
 TEST(UniquePtr, operator_multiplication) {
-    auto obj = UniquePtr<int>(new int(INIT_VALUE));
+    auto obj = my_smartptr::UniquePtr<int>(new int(INIT_VALUE));
 
     const auto value = *obj;
     const auto expected_value = INIT_VALUE;
@@ -34,7 +24,7 @@ TEST(UniquePtr, operator_multiplication) {
 }
 
 TEST(UniquePtr, reset) {
-    auto obj = UniquePtr<int>(new int(1));
+    auto obj = my_smartptr::UniquePtr<int>(new int(1));
     obj.reset(new int(2));
 
     const auto value = *obj;
@@ -43,16 +33,16 @@ TEST(UniquePtr, reset) {
 }
 
 TEST(UniquePtr, reset_nullptr) {
-    auto obj = UniquePtr<int>(new int(1));
+    auto obj = my_smartptr::UniquePtr<int>(new int(1));
     obj.reset();
 
     EXPECT_TRUE(obj.get() == nullptr);
 }
 
 TEST(UniquePtr, get) {
-    auto obj = UniquePtr<Foo>(new Foo(INIT_VALUE));
+    auto obj = my_smartptr::UniquePtr<int>(new int(INIT_VALUE));
 
     const auto *value = obj.get();
-    const auto expected_value = Foo(INIT_VALUE);
+    const auto expected_value = int(INIT_VALUE);
     ASSERT_EQ(*value, expected_value);
 }
