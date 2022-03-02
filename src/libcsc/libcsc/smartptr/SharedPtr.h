@@ -34,7 +34,7 @@ namespace my_smartptr {
             }
 
             ptr_ = object.ptr_;
-            count_ = object.count_;
+            count_ = object.count_ + 1;
             return *this;
         }
 
