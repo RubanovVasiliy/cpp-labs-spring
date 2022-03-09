@@ -56,7 +56,20 @@ TEST(SharedPtr, use_count_2) {
     auto obj = my_smartptr::SharedPtr<int>(new int(INIT_VALUE));
     auto ptr = my_smartptr::SharedPtr<int>(obj);
 
-    const auto value = ptr.use_count();
+    EXPECT_TRUE(obj.get() == ptr.get());
+
+    const auto value = obj.use_count();
     const auto expected_value = 2;
     ASSERT_EQ(value, expected_value);
+}
+
+TEST(SharedPtr, move_constructor) {
+    auto obj = my_smartptr::SharedPtr<int>(new int(INIT_VALUE));
+    auto ptr = my_smartptr::SharedPtr<int>(std::move(obj));
+
+    EXPECT_TRUE(obj.get() == nullptr);
+    EXPECT_TRUE(obj.use_count() == 0);
+
+    EXPECT_TRUE(ptr.get() != nullptr);
+    EXPECT_TRUE(ptr.use_count() == 1);
 }
