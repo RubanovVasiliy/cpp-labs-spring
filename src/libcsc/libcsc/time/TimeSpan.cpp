@@ -11,7 +11,8 @@ namespace my_time {
     std::ostream &operator<<(std::ostream &os, const TimeSpan &timeSpan) {
         os << std::setfill('0') << std::setw(2) << timeSpan.seconds_ / seconds_in_day << 'd' << ' ';
         os << std::setfill('0') << std::setw(2) << timeSpan.seconds_ / seconds_in_hour % hour_in_day << 'h' << ' ';
-        os << std::setfill('0') << std::setw(2) << timeSpan.seconds_ / seconds_in_minute % minute_in_minute << 'm'<< ' ';
+        os << std::setfill('0') << std::setw(2) << timeSpan.seconds_ / seconds_in_minute % minute_in_minute << 'm'
+           << ' ';
         os << std::setfill('0') << std::setw(2) << timeSpan.seconds_ % seconds_in_minute << 's' << '\n';
         return os;
     }
@@ -21,18 +22,18 @@ namespace my_time {
     }
 
     TimeSpan operator+(const TimeSpan &first, const TimeSpan &second) {
-        return TimeSpan(abs(first.seconds_ + second.seconds_));
+        return TimeSpan(abs(first.getSeconds() + second.getSeconds()));
     }
 
     TimeSpan operator-(const TimeSpan &first, const TimeSpan &second) {
-        return TimeSpan(abs(first.seconds_ - second.seconds_));
+        return TimeSpan(abs(first.getSeconds() - second.getSeconds()));
     }
 
     Time operator+(const Time &time, const TimeSpan &timeSpan) {
-        return Time(abs(time.getTime() + timeSpan.seconds_));
+        return Time(abs(time.getTime() + timeSpan.getSeconds()));
     }
 
     Time operator-(const Time &time, const TimeSpan &timeSpan) {
-        return Time(abs(time.getTime() - timeSpan.seconds_));
+        return Time(abs(time.getTime() - timeSpan.getSeconds()));
     }
 }
