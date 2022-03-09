@@ -27,14 +27,20 @@ namespace my_time {
     };
 
     inline namespace literals {
-        Time operator ""_s(uint64_t time);
+        inline Time operator ""_s(uint64_t time) {
+            return Time(static_cast<time_t>(time));
+        }
 
-        Time operator ""_m(uint64_t time);
+        inline Time operator ""_m(uint64_t time) {
+            return Time(static_cast<time_t>(time) * seconds_in_minute);
+        }
 
-        Time operator ""_h(uint64_t time);
+        inline Time operator ""_h(uint64_t time) {
+            return Time(static_cast<time_t>(time) * seconds_in_hour);
+        }
 
-        Time operator ""_d(uint64_t time);
-
-        Time operator "" _s(const char *str);
-    };
-};
+        inline Time operator ""_d(uint64_t time) {
+            return Time(static_cast<time_t>(time) * seconds_in_day);
+        }
+    }
+}
