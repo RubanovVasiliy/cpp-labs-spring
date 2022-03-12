@@ -145,6 +145,18 @@ namespace my_list {
             }
         }
 
+        void make_loop() {
+            if (size_ > 1) {
+                Node *node = head_;
+                while (node->next != nullptr) {
+                    node = node->next;
+                }
+                node->next = head_->next;
+            } else {
+                throw std::exception();
+            }
+        }
+
         Iterator begin() {
             Iterator it;
             it.value_ = head_;
