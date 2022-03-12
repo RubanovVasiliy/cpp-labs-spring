@@ -117,6 +117,24 @@ namespace my_list {
             }
         }
 
+        T &front() const {
+            if (head_ != nullptr) {
+                return head_->value;
+            }
+            throw std::exception();
+        }
+
+        T &back() const {
+            Node *node = head_;
+            while (node->next != nullptr) {
+                node = node->next;
+            }
+            if (node != nullptr) {
+                return node->value;
+            }
+            throw std::exception();
+        }
+
         int size() {
             return size_;
         }
