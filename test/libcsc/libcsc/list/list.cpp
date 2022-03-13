@@ -28,3 +28,11 @@ TEST(LinkedList, looped) {
 
     EXPECT_TRUE(mList.isLooped());
 }
+
+TEST(LinkedList, looped_with_one_element) {
+    my_list::LinkedList mList = my_list::LinkedList<int>();
+    mList.push_back(1);
+    mList.make_loop();
+
+    EXPECT_TRUE(mList.isLooped());
+}
