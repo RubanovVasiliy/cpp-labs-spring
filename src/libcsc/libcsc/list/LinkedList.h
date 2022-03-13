@@ -175,6 +175,28 @@ namespace my_list {
             }
         }
 
+        bool isLooped() {
+            if (head_ == nullptr) {
+                return false;
+            }
+
+            Iterator hare(head_);
+            Iterator turtle(head_);
+
+            while (turtle.ptr_ != nullptr) {
+                turtle = ++turtle;
+                if (turtle.ptr_ != nullptr) {
+                    hare = hare + 2;
+                } else {
+                    return false;
+                }
+                if (hare == turtle) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         Iterator begin() {
             Iterator it(head_);
             return it;
