@@ -30,4 +30,4 @@ namespace my_time {
     Time operator+(const Time &time, const TimeSpan &timeSpan);
 
     Time operator-(const Time &time, const TimeSpan &timeSpan);
-};
+}
