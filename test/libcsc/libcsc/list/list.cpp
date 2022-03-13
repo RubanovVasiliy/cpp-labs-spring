@@ -17,3 +17,14 @@ TEST(LinkedList, not_looped_empty_list) {
 
     EXPECT_FALSE(mList.isLooped());
 }
+
+TEST(LinkedList, looped) {
+    my_list::LinkedList mList = my_list::LinkedList<int>();
+    mList.push_back(1);
+    mList.push_back(2);
+    mList.push_back(3);
+    mList.push_back(5);
+    mList.make_loop();
+
+    EXPECT_TRUE(mList.isLooped());
+}
