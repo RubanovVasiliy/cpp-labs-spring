@@ -25,22 +25,4 @@ namespace my_time {
 
         friend std::ostream &operator<<(std::ostream &os, const Time &time);
     };
-
-    inline namespace literals {
-        inline Time operator ""_s(uint64_t time) {
-            return Time(static_cast<time_t>(time));
-        }
-
-        inline Time operator ""_m(uint64_t time) {
-            return Time(static_cast<time_t>(time) * seconds_in_minute);
-        }
-
-        inline Time operator ""_h(uint64_t time) {
-            return Time(static_cast<time_t>(time) * seconds_in_hour);
-        }
-
-        inline Time operator ""_d(uint64_t time) {
-            return Time(static_cast<time_t>(time) * seconds_in_day);
-        }
-    }
 }
