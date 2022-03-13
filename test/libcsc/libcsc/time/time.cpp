@@ -1,9 +1,11 @@
 #include <time/MyTime.h>
 #include <time/TimeSpan.h>
+#include <time/Literals.h>
 #include <gtest/gtest.h>
 #include <string>
 
 using namespace my_time;
+using namespace literals;
 
 TEST(MyTime, TimeSpan_Add_TimeSpan) {
     const auto first = TimeSpan(1);
