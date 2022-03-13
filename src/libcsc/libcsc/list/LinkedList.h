@@ -32,24 +32,44 @@ namespace my_list {
 
     public:
         class Iterator {
-        private:
+
             friend LinkedList;
 
-            Node *value_;
+        private:
+            Node *ptr_;
 
         public:
-            bool operator!=(const Iterator &iterator) {
-                return value_ != iterator.value_;
-            }
+            Iterator() : ptr_(nullptr) {}
+
+            explicit Iterator(Node *ptr) : ptr_(ptr) {}
+
+            Iterator(const Iterator &it) = default;
+
+            ~Iterator() = default;
+
+            bool operator==(const Iterator &it) { return ptr_ == it.ptr_; }
+
+            bool operator!=(const Iterator &other) { return ptr_ != other.ptr_; }
 
             Iterator &operator++() {
-                value_++;
+                if (ptr_ != nullptr) {
+                    ptr_ = ptr_->next;
+                }
                 return *this;
             }
 
-            Node &operator*() {
-                return *value_;
+            Iterator operator++(int) { return ++(*this); }
+
+            Iterator operator+(int n) {
+                for (int i = 0; i < n; i++) {
+                    ++(*this);
+                }
+                return *this;
             }
+
+            T &operator*() { return ptr_->value; }
+
+            T *operator->() { return &ptr_->value; }
         };
 
         LinkedList() : head_(nullptr), size_(0) {}
@@ -62,9 +82,7 @@ namespace my_list {
 
         LinkedList(LinkedList &&object) = delete;
 
-        ~LinkedList() {
-            clear();
-        };
+        ~LinkedList() { clear(); };
 
         LinkedList &operator=(const LinkedList &object) = delete;
 
@@ -135,9 +153,7 @@ namespace my_list {
             throw std::exception();
         }
 
-        int size() {
-            return size_;
-        }
+        int size() { return size_; }
 
         void clear() {
             while (size_ > 0) {
@@ -146,7 +162,9 @@ namespace my_list {
         }
 
         void make_loop() {
-            if (size_ > 1) {
+            if (size_ == 1) {
+                head_->next = head_;
+            } else if (head_ != nullptr) {
                 Node *node = head_;
                 while (node->next != nullptr) {
                     node = node->next;
@@ -158,16 +176,14 @@ namespace my_list {
         }
 
         Iterator begin() {
-            Iterator it;
-            it.value_ = head_;
+            Iterator it(head_);
             return it;
         }
 
         Iterator end() {
-            Iterator it;
-            it.value_ = head_;
-            while (it.value_ != nullptr) {
-                it.value_ = it.value_->next;
+            Iterator it(head_);
+            while (it.ptr_ != nullptr) {
+                it++;
             }
             return it;
         }
